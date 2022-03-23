@@ -27,11 +27,13 @@ $(document).ready(function() {
 
 	$('#Send').on('click', ()=> {
 		console.log("sending !!!!");
-		socket.emit('private_message',{
-			username:$("#sender_id").val(),
-			message:$('#myMessage').val(),
-			room :$("#room").val()
-		});
+		const A ={
+			user_id:$("#sender_id").val(),
+			msg:$('#myMessage').val(),
+			room_id :$("#room").val()
+		}
+		console.log(A)
+		socket.send(A);
 	});
 	$('#Alert').on('click', ()=> {
 		console.log("Alert !!!!");
@@ -47,7 +49,6 @@ $(document).ready(function() {
 <ul id="messages"></ul>
 <Label>room :</Label> <input type="text" id="room">
 <Label>username :</Label> <input type="text" id="sender_id">
-<button id="join">Join</button>
 <Label>message :</Label> <input type="text" id="myMessage">
 <button id="Send">Send</button>
 <button id="Alert">Alert</button>
