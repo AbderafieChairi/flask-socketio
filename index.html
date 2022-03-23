@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Chat Room</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+$(document).ready(function() {
+	var socket = io.connect('http://127.0.0.1:5000/');
+
+	socket.on('message', function(msg) {
+		$("#messages").append('<li> '+msg+'</li>');
+	});
+
+	// var socket = io('http://127.0.0.1:5000/private')
+
+	$('#join').on('click', ()=> {
+		console.log("joining !!!!");
+		socket.emit('join',
+			{username:$("#sender_id").val(),
+			room :$("#room").val()}
+			);
+	});
+
+	$('#Send').on('click', ()=> {
+		console.log("sending !!!!");
+		socket.emit('private_message',{
+			username:$("#sender_id").val(),
+			message:$('#myMessage').val(),
+			room :$("#room").val()
+		});
+	});
+	$('#Alert').on('click', ()=> {
+		console.log("Alert !!!!");
+		socket.send($('#myMessage').val());
+	});
+  //   socket.on('new_private_message', function(msg) {
+		// $("#messages").append('<li> private : '+msg+'</li>');
+  //   });
+
+
+});
+</script>
+<ul id="messages"></ul>
+<Label>room :</Label> <input type="text" id="room">
+<Label>username :</Label> <input type="text" id="sender_id">
+<button id="join">Join</button>
+<Label>message :</Label> <input type="text" id="myMessage">
+<button id="Send">Send</button>
+<button id="Alert">Alert</button>
+
+</body>
+</html>
