@@ -11,7 +11,7 @@ db.init_app(app)
 app.config['SECRET_KEY'] = 'mysecret'
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] ="postgres://dmajucpgzfjpef:ed7e7cd83bb95527cb30d83b3bfcebcb749e5fc2effea616b1860311a4adbf6a@ec2-54-73-178-126.eu-west-1.compute.amazonaws.com:5432/dat8693bl607v1"
+app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://dmajucpgzfjpef:ed7e7cd83bb95527cb30d83b3bfcebcb749e5fc2effea616b1860311a4adbf6a@ec2-54-73-178-126.eu-west-1.compute.amazonaws.com:5432/dat8693bl607v1"
 # app.config['SQLALCHEMY_DATABASE_URI'] ="sqlite:///test.db"
 socketio = SocketIO(app, cors_allowed_origins='*')
 admin = Admin(app)
